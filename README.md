@@ -69,7 +69,7 @@ The admin panel includes a settings management system that allows you to configu
 2. Serve artisan:
    ```bash
    php artisan serve
-   ``
+   ```
 
 ## Usage
 
