@@ -57,7 +57,7 @@ The admin panel includes a settings management system that allows you to configu
 3. Run migrations to set up the database:
    ```bash
    php artisan migrate --seed
-   ``
+   ```
 
 
 ## To run it
