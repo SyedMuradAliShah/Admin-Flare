@@ -52,22 +52,31 @@ The admin panel includes a settings management system that allows you to configu
 2. Install dependencies:
    ```bash
    composer install
-   npm install && npm run dev
+   npm install
    ```
 3. Run migrations to set up the database:
    ```bash
-   php artisan migrate
-   ```
-4. Seed roles and permissions (if necessary):
+   php artisan migrate --seed
+   ``
+
+
+## To run it
+
+1. Run NPM:
    ```bash
-   php artisan db:seed --class=RolePermissionSeeder
+   npm run dev
    ```
+2. Serve artisan:
+   ```bash
+   php artisan serve
+   ``
 
 ## Usage
 
 1. Navigate to the admin panel.
 2. Use the **Settings** tab to manage general or social settings.
-3. Use **Role Management** to assign or update roles and permissions.
+3. Use **Admin** to create or update admins.
+4. Use **Role Management** to assign or update roles and permissions.
 
 ## License
 
