@@ -11,8 +11,8 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
     <!-- Scripts -->
-    @vite(['resources/css/admin/app.css', 'resources/js/admin/app.js'], 'assets/admin/build')
-    {{-- @vite(['resources/css/admin/app.css']) --}}
+    {{-- @vite(['resources/css/admin/app.css', 'resources/js/admin/app.js'], 'assets/admin/build') --}}
+    @vite(['resources/css/admin/app.css'])
 </head>
 <body>
     <body>
@@ -34,6 +34,6 @@
             </div>
         </div>
 
-        {{-- @vite(['resources/js/admin/app.js']) --}}
+        @vite(['resources/js/admin/app.js'])
     </body>
 </html>
