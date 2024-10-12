@@ -5,20 +5,20 @@ export default defineConfig({
     plugins: [
         laravel({
             input: [
-                'resources/css/tailwind/app.css',
-                'resources/js/tailwind/app.js',
+                'resources/css/admin/app.css',
+                'resources/js/admin/app.js',
             ],
             refresh: true,
-            // publicDirectory: 'public/assets/admin',
+            publicDirectory: 'public/assets/admin',
         },
-            {
-                input: [
-                    'resources/css/bootstrap/app.css',
-                    'resources/js/bootstrap/app.js',
-                ],
-                refresh: true,
-                publicDirectory: 'public/assets/user',
-            }
+            // {
+            //     input: [
+            //         'resources/css/bootstrap/app.css',
+            //         'resources/js/bootstrap/app.js',
+            //     ],
+            //     refresh: true,
+            //     publicDirectory: 'public/assets/user',
+            // }
         ),
     ],
 });
