@@ -62,15 +62,6 @@ class Admin extends Authenticatable implements MustVerifyEmail
     }
 
     /**
-     * Override getMorphClass to return the polymorphic class name
-     */
-    #[Override]
-    public function getMorphClass(): string
-    {
-        return 'Admin';
-    }
-
-    /**
      * Full name accessor
      */
     public function getFullNameAttribute(): string

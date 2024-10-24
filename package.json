@@ -3,7 +3,9 @@
     "type": "module",
     "scripts": {
         "dev": "vite",
-        "build": "vite build"
+        "build-admin": "vite build --config vite.admin.config.js",
+        "build-user": "vite build --config vite.user.config.js",
+        "build": "npm run build-admin && npm run build-user"
     },
     "devDependencies": {
         "@tailwindcss/forms": "^0.5.2",

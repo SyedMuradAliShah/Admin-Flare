@@ -42,14 +42,6 @@ class User extends Authenticatable implements MustVerifyEmail
         'remember_token',
     ];
 
-    /**
-     * Override getMorphClass to return the polymorphic class name
-     */
-    #[Override]
-    public function getMorphClass(): string
-    {
-        return 'User';
-    }
 
     /**
      * Get the attributes that should be cast.
