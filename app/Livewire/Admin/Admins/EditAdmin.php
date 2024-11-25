@@ -16,7 +16,6 @@ use Livewire\Attributes\Validate;
 use Illuminate\Support\Facades\Auth;
 use App\Livewire\Forms\Admin\Admins\AdminForm;
 use Illuminate\Validation\ValidationException;
-use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 
 #[Title('Admins')]
 #[Layout('layouts.admin.app')]
@@ -70,10 +69,8 @@ class EditAdmin extends Component
                 'image.image' => 'The file must be an image.',
             ]);
         } catch (ValidationException) {
-            if ($this->image instanceof TemporaryUploadedFile) {
-                $this->image->delete();
-            }
 
+            $this->image->delete();
             $this->reset('image');
 
             return;
@@ -108,10 +105,7 @@ class EditAdmin extends Component
                 'bar' => true,
             ]);
         } catch (ValidationException) {
-            if ($this->image instanceof TemporaryUploadedFile) {
-                $this->image->delete();
-            }
-
+            $this->image->delete();
             $this->reset('image');
 
             return;

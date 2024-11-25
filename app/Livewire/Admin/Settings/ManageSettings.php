@@ -51,10 +51,7 @@ class ManageSettings extends Component
                 'logo.logo' => 'The file must be an image.',
             ]);
         } catch (ValidationException) {
-            if ($this->logo instanceof TemporaryUploadedFile) {
-                $this->logo->delete();
-            }
-
+            $this->logo->delete();
             $this->reset('logo');
 
             return;
@@ -89,10 +86,7 @@ class ManageSettings extends Component
                 'bar' => true,
             ]);
         } catch (ValidationException) {
-            if ($this->logo instanceof TemporaryUploadedFile) {
-                $this->logo->delete();
-            }
-
+            $this->logo->delete();
             $this->reset('logo');
 
             $this->dispatch('swal:alert', [
@@ -118,10 +112,7 @@ class ManageSettings extends Component
                 'favicon.favicon' => 'The file must be an image.',
             ]);
         } catch (ValidationException) {
-            if ($this->favicon instanceof TemporaryUploadedFile) {
-                $this->favicon->delete();
-            }
-
+            $this->favicon->delete();
             $this->reset('favicon');
 
             return;
@@ -156,10 +147,8 @@ class ManageSettings extends Component
                 'bar' => true,
             ]);
         } catch (ValidationException) {
-            if ($this->favicon instanceof TemporaryUploadedFile) {
-                $this->favicon->delete();
-            }
-
+            
+            $this->favicon->delete();
             $this->reset('favicon');
 
             $this->dispatch('swal:alert', [
