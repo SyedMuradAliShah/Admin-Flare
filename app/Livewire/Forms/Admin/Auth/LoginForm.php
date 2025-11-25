@@ -9,9 +9,10 @@ use Illuminate\Support\Str;
 use Livewire\Attributes\Validate;
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Schema;
 
 class LoginForm extends Form
 {
@@ -35,20 +36,35 @@ class LoginForm extends Form
     {
         $this->ensureIsNotRateLimited();
 
-        if (! Auth::guard('admin')->attempt($this->credentials(), remember: $this->remember)) {
-            RateLimiter::hit($this->throttleKey());
-
-            $this->swal = [
-                'icon' => 'error',
-                'title' => 'Login Failed',
-                'text' => trans('auth.failed'),
-            ];
-
-            $this->reset('password');
-
+        if (Auth::guard('admin')->attempt($this->getCredentials(), $this->remember)) {
+            $this->handleSuccessfulLogin();
             return;
         }
 
+        $this->handleFailedLogin();
+    }
+
+    private function getCredentials(): array
+    {
+        return [
+            'password' => $this->password,
+            function (Builder $query) {
+                $query->where('email', $this->email);
+                
+                if ($this->hasUsernameColumn()) {
+                    $query->orWhere('username', $this->email);
+                }
+            }
+        ];
+    }
+
+    private function hasUsernameColumn(): bool
+    {
+        return Schema::hasColumn('admins', 'username');
+    }
+
+    private function handleSuccessfulLogin(): void
+    {
         $this->swal = [
             'icon' => 'success',
             'title' => 'Login Successful',
@@ -58,6 +74,19 @@ class LoginForm extends Form
         ];
 
         RateLimiter::clear($this->throttleKey());
+    }
+
+    private function handleFailedLogin(): void
+    {
+        RateLimiter::hit($this->throttleKey());
+
+        $this->swal = [
+            'icon' => 'error',
+            'title' => 'Login Failed',
+            'text' => trans('auth.failed'),
+        ];
+
+        $this->reset('password');
     }
 
     /**
@@ -87,21 +116,5 @@ class LoginForm extends Form
     protected function throttleKey(): string
     {
         return Str::transliterate(Str::lower($this->email).'|'.request()->ip());
-    }
-
-    private function credentials(): array
-    {
-        $user_type = Validator::make(
-            ['email' => $this->email],
-            [
-                'email' => 'required|string|email',
-            ],
-        )->passes() ? 'email' : 'username';
-
-        return [
-            $user_type => $this->email,
-            'password' => $this->password,
-        ];
-
     }
 }

@@ -478,17 +478,26 @@ body {
             }
         }
     }
+
     .table-responsive {
         background-color: var(--background);
         .custom-table {
             background: var(--bs-table-bg) !important;
             tbody {
+                vertical-align: inherit;
                 tr {
                     vertical-align: middle;
                     border-bottom: 1px solid var(--border-color);
                     padding: 10px;
+                    th {
+                        padding: 10px 1px 10px 1px;
+                        white-space: wrap;
+                        max-width: 200px;
+                    }
                     td {
-                        padding: 10px;
+                        padding: 10px 1px 10px 1px;
+                        white-space: wrap;
+                        max-width: 200px;
                     }
                     &:nth-last-child(1) {
                         border-color: transparent !important;
@@ -505,6 +514,13 @@ body {
                         }
                     }
                 }
+            }
+            thead {
+                vertical-align: bottom;
+            }
+            &:not(caption) > * > * {
+                padding: 0.75rem 1rem;
+                vertical-align: middle;
             }
         }
     }
